@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    /* hidden scrollbar */
+  .scrollbar-hidden::-webkit-scrollbar {
+    @apply hidden;
+  }
+
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* custom outline */
+  .default-outline {
+    @apply focus-visible:outline-black dark:focus-visible:outline-white rounded-[4px];
+  }
+}
