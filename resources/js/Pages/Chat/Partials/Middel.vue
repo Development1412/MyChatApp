@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Ref, onMounted, ref } from 'vue';
+import Message from '@/Pages/Chat/Partials/Message.vue';
 
 
 const props = defineProps({
@@ -7,6 +8,7 @@ const props = defineProps({
     avtar: String,
     light: String,
     dark: String,
+    messages: Object,
 })
 
 const container: Ref<HTMLElement | null> = ref(null);
@@ -17,6 +19,7 @@ onMounted(() => {
     container.value as HTMLElement
   ).scrollHeight;
 });
+console.log(props.messages)
 </script>
 
 <template>
@@ -25,8 +28,8 @@ onMounted(() => {
     class="grow px-5 py-5 flex flex-col overflow-y-scroll scrollbar-hidden"
   >
     <div>
-        <div v-for="index in 50" :key="index">
-            <h5>Message {{ index }}</h5><hr />
+        <div v-for="(data, index) in $props.messages" :key="index">
+            <Message :message="data"/>
         </div>
     </div>
   </div>

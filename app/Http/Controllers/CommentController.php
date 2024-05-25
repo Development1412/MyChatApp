@@ -8,6 +8,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 
 class CommentController extends Controller
 {
@@ -84,5 +85,13 @@ class CommentController extends Controller
         MessageSent::dispatch($comment);
 
         return Redirect::back()->with(['status' => true, 'message' => "Message sent"]);
+    }
+
+
+    public function fetchMessage($roomId)
+    {
+        $room = ChatRoom::find($roomId);
+        $messages = $room->messages;
+        return Response::json(["messages" => $messages],200);
     }
 }

@@ -11,7 +11,7 @@ class ChatRoomController extends Controller
 {
     public function index()
     {
-        $rooms = ChatRoom::with(['users', 'messages'])->get();
+        $rooms = ChatRoom::with(['users', 'lastMessage'])->get();
         return Inertia::render('Chat/ChatHome', [
             'rooms' => $rooms,
             'mustVerifyEmail' => true,

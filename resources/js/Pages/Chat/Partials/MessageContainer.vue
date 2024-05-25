@@ -8,13 +8,16 @@ const props = defineProps({
     avtar: String | undefined,
     light: String,
     dark: String,
-    currentRoom: Object
+    currentRoom: Object,
+    messages: Object,
 })
+
+console.log(props)
 </script>
 <template>
     <div class="h-full flex flex-col scrollbar-hidden">
         <Header :name="$props.name" :avtar="$props.avtar" :light="$props.light" :dark="$props.dark" />
-        <Middel />
+        <Middel :messages="messages" />
 
         <Bottom  :currentRoom="$props.currentRoom"/>
     </div>

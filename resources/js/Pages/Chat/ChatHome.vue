@@ -12,10 +12,16 @@ const props = defineProps<{
 }>();
 
 const currentRoom = ref<RoomsProps>();
+const messages = ref();
 
 const changeRoom = (roomId: any) => {
     currentRoom.value = props.rooms.find(value => roomId == value.id)
-    console.log(currentRoom)
+    fetch(route('message.fetch', [roomId]))
+        .then(response => response.json())
+        .then(result => {
+            messages.value = result?.messages;
+        });
+
 }
 
 const getInitials = (name: String) => {
@@ -72,7 +78,7 @@ onMounted(() => {
 
         <template #message v-if="currentRoom">
             <MessageContainer :name="currentRoom?.name" :light="light" :dark="dark"
-                :avtar="getInitials(currentRoom.name)" :currentRoom="currentRoom" />
+                :avtar="getInitials(currentRoom.name)" :currentRoom="currentRoom" :messages="messages" />
         </template>
     </ChatLayout>
 </template>

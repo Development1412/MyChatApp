@@ -18,4 +18,9 @@ class ChatRoom extends Model
     {
         return $this->morphToMany(Comment::class, 'commentable');
     }
+
+    public function lastMessage()
+    {
+        return $this->morphToMany(Comment::class, 'commentable')->latest()->take(1);
+    }
 }

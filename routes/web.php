@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChatRoomController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
+use App\Models\ChatRoom;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/chat', [ChatRoomController::class, 'index']);
     Route::post('/message', [CommentController::class, 'sendMessage'])->name('message.send');
+    Route::get('fetch-message/{roomId}', [CommentController::class, 'fetchMessage'])->name('message.fetch');
 });
 
 
